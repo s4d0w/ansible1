@@ -1,0 +1,16 @@
+---
+- name: $HOME/.bashrc 파일 배포
+  hosts: all
+  gather_facts: no
+  remote_user: devops
+  become: false
+  tasks:
+  - name: 템플릿 bashrc.j2를 사용한 $HOME/.bashrc 파일 배포
+    template:
+      src: templates/bashrc.j2
+      dest: .bashrc
+
+  - name: 디렉토리 복사
+    copy:
+      src: files/blesh
+      dest: .local/share

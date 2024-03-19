@@ -1,0 +1,15 @@
+---
+- name: Remove the configuration file
+  file:
+    path: "{{ db_config_path }}"
+    state: absent
+
+- name: Remove the database packages
+  yum: 
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ db_packages }}"
+
+- name: Remove the motd file
+  shell:
+    cmd: '> /etc/motd'
